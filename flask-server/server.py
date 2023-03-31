@@ -1,10 +1,23 @@
-from flask import Flask
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from database import *
 
-app = Flask("__name__")
+app = Flask(__name__)
+CORS(app)
 
-app.route("/members")
-def members():
-    return {"members" : ["member1", "member2", "member3"]}
+@app.route('/data', methods=['GET'])
+def GET_DATA():
+    data = get_data()
+    return jsonify(data)
 
-if __name__ == "__main__":
-    app.run(debug = True)
+@app.route('/data', methods=['POST'])
+def ADD_DATA():
+    cursor = db.cursor()
+    data = request.get_json()
+    name = data['name']
+    age = data['age']
+    add_data(name, age)
+    return "Data added successfully"
+
+if __name__ == '__main__':
+    app.run(debug=True)
