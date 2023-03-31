@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-backend": "cd Dashboard\\flask-server && C:\\Users\\karti\\Unknown\\CS\\venvs\\Dashboard\\Scripts\\activate.bat && flask run server.py --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
