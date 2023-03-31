@@ -1,0 +1,96 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.loginScreen {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginScreen > .panel {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginScreen > .blue-side {
+    background-color: #8ecae6;
+}
+
+.loginScreen > .panel > .panel-img {
+    width: 450px;
+    height: 250px;
+    background-image: url('../assets/panel-image.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.loginWrapper {
+    width: 360px;
+    height: 340px;
+}
+
+.loginWrapper > h1 {
+    color: #219ebc;
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 36px;
+}
+
+
+.loginWrapper > input {
+    height: 30px;
+    width: 330px;
+    padding: 6px 10px;
+    border: 2px solid #8ecae6;
+    border-radius: 6px;
+    margin-bottom: 24px;
+}
+
+.loginWrapper > input:focus {
+    outline: none;
+}
+
+.loginWrapper > .remember {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #219ebc;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.loginWrapper > button {
+    height: 42px;
+    width: 355px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #219ebc;
+    border-radius: 6px;
+    background-color: #219ebc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.loginWrapper > button:hover {
+    color: #219ebc;
+    background-color: #fff;
+}
+
+.loginWrapper > .error {
+    color: red;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 16px;
+}
+

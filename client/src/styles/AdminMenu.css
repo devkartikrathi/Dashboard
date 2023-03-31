@@ -1,0 +1,23 @@
+.adminMenu {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.screenWrapper {
+    display: flex;    
+    align-items: center;
+}
+
+.welcome {
+    width: 75%;
+    height: 90vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-top: 6px;
+    border-radius: 16px;
+    background-color: rgba(0,0,0,0.05);
+}

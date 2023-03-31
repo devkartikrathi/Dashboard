@@ -1,0 +1,29 @@
+.optionPanel {
+    width: 25%;
+    height: 90vh;
+    background-color: #219ebc;
+
+    margin-top: 4px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.optionItems {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+
+    padding: 16px 0;
+    padding-left: 40px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.optionItems:hover {
+    color: #219ebc;
+    background-color: #fff;
+}

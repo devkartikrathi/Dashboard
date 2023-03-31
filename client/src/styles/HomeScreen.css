@@ -1,0 +1,67 @@
+.homeScreen {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.screenWrapper {
+    display: flex;    
+    align-items: center;
+}
+
+.welcome {
+    width: 75%;
+    height: 90vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-top: 6px;
+    border-radius: 16px;
+    background-color: rgba(0,0,0,0.05);
+}
+
+.welcome > h2 {
+    color: red;
+}
+
+.welcomeBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 250px;
+    margin-top: 20px;
+    padding: 20px 40px 40px 40px;
+    border: 2px solid #219ebc;
+    border-radius: 6px;
+}
+
+.welcomeBox > h3 {
+    color: red;
+}
+
+.welcomeBoxBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 120px;
+    height: 35px;
+    margin-top: 16px;
+    
+    color: #fff;
+    background-color: #219ebc;
+    border: 2px solid #219ebc;
+    
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 6px;
+}
+
+.welcomeBoxBtn:hover {
+    color: #219ebc;
+    background-color: #fff;
+}

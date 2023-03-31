@@ -1,0 +1,8 @@
+.loading {
+    height: 100vh;
+    width: 100%;
+    z-index: 1111;
+    background-image: url("../assets/loader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
