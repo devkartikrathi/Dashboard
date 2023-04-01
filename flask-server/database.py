@@ -19,6 +19,7 @@ def get_data():
     return data
 
 def add_data(name, age):
+    cursor = db.cursor()
     query = "INSERT INTO yourtable (name, age) VALUES (%s, %s)"
     values = (name, age)
     cursor.execute(query, values)
