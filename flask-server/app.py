@@ -5,6 +5,10 @@ from database import *
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/') # type: ignore
+def INDEX_1():
+    pass
+
 @app.route('/data', methods=['GET'])
 def GET_DATA():
     data = get_data()
@@ -12,7 +16,6 @@ def GET_DATA():
 
 @app.route('/data', methods=['POST'])
 def ADD_DATA():
-    cursor = db.cursor()
     data = request.get_json()
     name = data['name']
     age = data['age']
