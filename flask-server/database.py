@@ -11,7 +11,7 @@ db = mysql.connector.connect(
 cursor = db.cursor()
 
 def get_data():
-    cursor.execute("SELECT * FROM yourtable")
+    cursor.execute("SELECT * FROM studentdata")
     result = cursor.fetchall()
     data = []
     for row in result:
@@ -25,3 +25,8 @@ def add_data(name, age):
     cursor.execute(query, values)
     db.commit()
     return "Data added successfully"
+
+def course_data():
+    cursor.execute("SELECT * FROM courses")
+    result = cursor.fetchall()
+    return result

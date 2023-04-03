@@ -9,7 +9,7 @@ CORS(app)
 def INDEX_1():
     return render_template('index.html')
 
-@app.route('/register', methods = ['POST'])
+@app.route('/register', methods = ['POST']) # type: ignore
 def register():
     username = request.form['username']
     password = request.form['password']
@@ -30,12 +30,16 @@ def register():
     if len(password) < minpasslen:
         error_msg = 'Password must be between 5-15 characters!'
 
-@app.route('/login', methods = ['POST'])
+@app.route('/login', methods = ['GET', 'POST']) # type: ignore
 def login():
-    username = request.form['username']
-    password = request.form['password']
-    remember = request.form.get('remember', False)
-    
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        remember = request.form.get('remember', False)
+
+    if request.method == 'GET':
+        return jsonify(course_data())
+
 @app.route('/data', methods=['GET'])
 def GET_DATA():
     data = get_data()
