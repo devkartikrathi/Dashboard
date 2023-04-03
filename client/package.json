@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-backend": "cd Dashboard\\flask-server && C:\\Users\\karti\\Unknown\\CS\\venvs\\Dashboard\\Lib\\site-packages\\flask run --no-debugger",
+    "start-backend": "cd Dashboard\\flask-server && C:\\Users\\riane\\Dsh3outside\\venv\\Lib\\site-packages\\flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
