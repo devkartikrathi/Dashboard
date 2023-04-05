@@ -21,17 +21,15 @@ def register():
         lambda s: any(x.islower() for x in s),
         lambda s: any(x.isdigit() for x in s) 
     ]
-
     if len(username) < min_user_len or not all(req(username) for req in username_req):
         error_mess = 'Invalid username! Username must be 5-15 characters, a-z, A-Z and 0-9!'
 
     minpasslen = 5
-
     if len(password) < minpasslen:
         error_msg = 'Password must be between 5-15 characters!'
 
 @app.route('/login', methods = ['GET', 'POST']) # type: ignore
-def login():
+def LOGIN():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -40,18 +38,20 @@ def login():
     if request.method == 'GET':
         return jsonify(course_data())
 
-@app.route('/data', methods=['GET'])
-def GET_DATA():
-    data = get_data()
-    return jsonify(data)
+@app.route('/data', methods=['GET', 'POST'])
+def DATA():
+    if request.method == 'GET':
+        data = get_data()
+        return jsonify(data)
 
-@app.route('/data', methods=['POST'])
-def ADD_DATA():
-    data = request.get_json()
-    name = data['name']
-    age = data['age']
-    add_data(name, age)
-    return "Data added successfully"
+    else:
+        data = request.get_json()
+        stdid = data['stdid']
+        name = data['name']
+        course = data['course']
+        email = data['email']
+        data = add_data(stdid, name, course, email)
+        return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -15,16 +15,16 @@ def get_data():
     result = cursor.fetchall()
     data = []
     for row in result:
-        data.append({'id': row[0], 'name': row[1], 'age': row[2]})
+        data.append({'stdid': row[0], 'name': row[1], 'course': row[2], 'email': row[3]})
     return data
 
-def add_data(name, age):
+def add_data(stdid, name, course, email):
     cursor = db.cursor()
-    query = "INSERT INTO yourtable (name, age) VALUES (%s, %s)"
-    values = (name, age)
+    query = "INSERT INTO studentdata (stdid, name, course, email) VALUES (%s, %s, %s, %s)"
+    values = (stdid, name, course, email)
     cursor.execute(query, values)
     db.commit()
-    return "Data added successfully"
+    return get_data()
 
 def course_data():
     cursor.execute("SELECT * FROM courses")
