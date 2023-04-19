@@ -38,20 +38,20 @@ def LOGIN():
     if request.method == 'GET':
         return jsonify(course_data())
 
-@app.route('/data', methods=['GET', 'POST'])
-def DATA():
-    if request.method == 'GET':
-        data = get_data()
-        return jsonify(data)
+# @app.route('/data', methods=['GET', 'POST'])
+# def DATA():
+#     if request.method == 'GET':
+#         data = get_data()
+#         return jsonify(data)
 
-    else:
-        data = request.get_json()
-        stdid = data['stdid']
-        name = data['name']
-        course = data['course']
-        email = data['email']
-        data = add_data(stdid, name, course, email)
-        return jsonify(data)
+#     else:
+#         data = request.get_json()
+#         stdid = data['stdid']
+#         name = data['name']
+#         course = data['course']
+#         email = data['email']
+#         data = add_data(stdid, name, course, email)
+#         return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
