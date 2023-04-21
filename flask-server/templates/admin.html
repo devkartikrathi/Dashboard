@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block active_admin %}active{% endblock %}
+
+{% block content %}
+  <h1>Admin Dashboard</h1>
+  {% if message %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+  {% endif %}
+  <form method="POST" action="{{ url_for('add_course') }}">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" name="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" name="price" min="0">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Course</button>
+  </form>
+{% endblock %}

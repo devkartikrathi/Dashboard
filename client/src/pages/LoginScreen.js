@@ -34,7 +34,7 @@ function LoginScreen() {
             return;
         } 
 
-        axios.post('http://localhost:3001/login', {
+        axios.post('http://127.0.0.1:5000/login', {
             username: username,
             password: password
         })

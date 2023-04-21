@@ -40,6 +40,9 @@ courses = db['courses']
 #     print(document)
 # {'_id': ObjectId('643f71e2d2768df739e78545'), 'username': 'john', 'password': 'password123', 'role': 'admin'}
 
+def check_user(username, password):
+    for document in users.find():
+        return document
 
 def course_data():
     course = []
@@ -47,3 +50,7 @@ def course_data():
         document['_id'] = str(document['_id'])
         course.append(document)
     return(course)
+
+def add(teacher):
+    users.insert_one(teacher)
+
