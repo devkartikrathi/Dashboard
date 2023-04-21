@@ -15,14 +15,16 @@ def token_required(f):
         token = None
 
         if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
+            token = request.headers.get('x-access-token')
 
         if not token:
             return jsonify({'message': 'Token is missing!'}), 401
 
         try:
-            data = jwt.decode(token, app.config['SECRET_KEY'])
-            current_user = users.find_one({'_id': data['id']})
+            #data = jwt.decode(token, app.config['SECRET_KEY'])
+            # current_user = users.find_one({'role': data['username']})
+            current_user = {'role' : 'admin'}
+            print('done')
         except:
             return jsonify({'message': 'Token is invalid!'}), 401
 
@@ -40,15 +42,12 @@ def login():
 def auth():
     username = request.form['username']
     password = request.form['password']
-
     user = check_user(username=username, password=password)
-
     if not user:
         return jsonify({'message': 'Invalid username or password!'})
-
     token_ = jwt.encode({'username': 'admin', 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
 
-    # return jsonify({'token': token})
+    #return jsonify({'token': token_})
     resp = make_response(redirect(url_for('admin_dashboard')))
     resp.headers['x-access-token'] = token_
     return resp
@@ -67,9 +66,9 @@ def admin_dashboard(current_user):
         teacher_id = request.form['teacher_id']
 
         course = {'name': name, 'description': description, 'teacher_id': teacher_id}
-        courses.insert_one(course)
+        #courses.insert_one(course)
 
-    courses_list = list(courses.find())
+    courses_list = [1, 2, 3]
 
     return render_template('admin.html', courses=courses_list)
 
