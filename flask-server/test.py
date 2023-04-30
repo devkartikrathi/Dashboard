@@ -2,10 +2,11 @@ from flask import Flask, jsonify, request, render_template, redirect, url_for, m
 import jwt
 import datetime
 from functools import wraps
+from flask_cors import CORS
 from database import *
 
 app = Flask(__name__)
-
+CORS(app)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 # Decorator for authentication
