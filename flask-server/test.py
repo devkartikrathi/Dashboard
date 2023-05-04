@@ -1,88 +1,75 @@
 from flask import Flask, jsonify, request, render_template, redirect, url_for, make_response
+from flask_cors import CORS
 import jwt
 import datetime
 from functools import wraps
-from flask_cors import CORS
-from database import *
 
 app = Flask(__name__)
 CORS(app)
+
 app.config['SECRET_KEY'] = 'your_secret_key'
 
-# Decorator for authentication
+# Auth Decorator
 def token_required(f):
     @wraps(f)
+
     def decorated(*args, **kwargs):
         token = None
 
         if 'x-access-token' in request.headers:
             token = request.headers.get('x-access-token')
-
         if not token:
             return jsonify({'message': 'Token is missing!'}), 401
-
+        
         try:
-            #data = jwt.decode(token, app.config['SECRET_KEY'])
-            # current_user = users.find_one({'role': data['username']})
-            current_user = {'role' : 'admin'}
-            print('done')
+            current_user = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         except:
             return jsonify({'message': 'Token is invalid!'}), 401
 
         return f(current_user, *args, **kwargs)
-
     return decorated
 
-# Login route
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    return render_template('login.html')
 
-# Authenticate user route
-@app.route('/auth', methods=['POST'])
-def auth():
+# Authenticate user
+@app.route('/login', methods=['POST'])
+def login():
     username = request.form['username']
     password = request.form['password']
-    user = check_user(username=username, password=password)
-    if not user:
-        return jsonify({'message': 'Invalid username or password!'})
-    token_ = jwt.encode({'username': 'admin', 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+    username = username.lower()
+
+    # user = check_user(username=username, password=password)
+    # if not user:
+    #     return jsonify({'message': 'Invalid username or password!'})
+    
+    if username not in ['admin', 'faculty', 'dean']:
+        return jsonify({'status': 401})
+
+    token_ = jwt.encode({'username': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
 
     return jsonify({'token': token_})
-    # resp = make_response(redirect(url_for('admin_dashboard')))
-    # resp.headers['x-access-token'] = token_
-    # return resp
-    # return redirect(url_for('admin'), headers={'x-access-token': token})
 
-# Admin dashboard route
-# @app.route('/admin', methods=['GET', 'POST'])
-# @token_required
-# def admin_dashboard(current_user):
-#     if current_user['role'] != 'admin':
-#         return jsonify({'message': 'You do not have access to this page!'})
 
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         description = request.form['description']
-#         teacher_id = request.form['teacher_id']
+# Home
+@app.route('/home', methods=['GET'])
+@token_required
 
-#         course = {'name': name, 'description': description, 'teacher_id': teacher_id}
-#         #courses.insert_one(course)
+def home(current_user):
+    user = current_user['username']
 
-#     courses_list = [1, 2, 3]
+    return jsonify({
+        'username': user,
+        'name': 'Abhishek Bisht',
+        'department': 'School of Engineering and Technology',
+        
+        'role': 'Administrator',
+        'designation': 'Administrator',
 
-#     return render_template('admin.html', courses=courses_list)
-
-# Teacher dashboard route
-# @app.route('/teacher', methods=['GET'])
-# @token_required
-# def teacher_dashboard(current_user):
-#     if current_user['role'] != 'teacher':
-#         return jsonify({'message': 'You do not have access to this page!'})
-
-#     courses_list = list(courses.find({'teacher_id': str(current_user['_id'])}))
-
-#     return render_template('teacher.html', courses=courses_list)
+        # 'role': 'Faculty',
+        # 'designation': 'Associate Professor',
+        
+        # 'role': 'Dean',
+        # 'designation': 'Dean',
+    })
 
 # Add course
 @app.route('/addcourse', methods=['POST']) # type: ignore
@@ -140,7 +127,5 @@ def LOCF(current_user):
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-# {"program": "program", "course_code": "course_code", "course_name": "course_name", "course_type": "course_type"}
-# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjgyMDU4NDAxfQ.V6YQlftOt8S20Sivc4wLRpcT3voTw5I2CnbvlE55xXw
-# /MANAGE_CONTENT = > 
+if __name__ == '__main__':
+    app.run(debug=True)
